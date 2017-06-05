@@ -26,6 +26,7 @@ export default class CoinInfo extends Component {
   render() {
     return (
       <div>
+
       <a href="#" onClick={this.showDescription.bind(this)}><p style={{fontWeight: this._selectedItem()}}>{this.props.coin.Name}</p></a>
       {this.state.selected && (
         <div>

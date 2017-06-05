@@ -3,11 +3,29 @@ import { connect } from 'react-redux';
 import { fetchCoins } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import CoinInfo from '../components/CoinInfo'
+import VirtualizedSelect from 'react-virtualized-select'
+
+import 'react-select/dist/react-select.css'
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
 
 class Container extends Component {
 
+  constructor() {
+    super()
+    this.state = {
+      selectValue: null,
+      showResults: false
+    }
+  }
   componentWillMount() {
     this.props.fetchCoins()
+  }
+
+  displayCoins() {
+    this.setState({
+      showResults: !this.state.showResults
+    })
   }
 
   // renderItemList() {
@@ -32,14 +50,28 @@ class Container extends Component {
       )
     } else {
       console.log('hello');
-      console.log(this.props.coins);
+      const options = [
+      { label: "One", value: 1 },
+      { label: "Two", value: 2 },
+      { label: "Three", value: 3, disabled: true }
+      // And so on...
+    ]
+
+      console.log(this.props.coins)
+      console.log(this.props.coins.Markets)
       return (
         <div>
-          {this.props.coins.Markets.map((coin) => {
-            return (
-              <CoinInfo key={coin.Name} coin={coin} />
-            )
-          })}
+          <VirtualizedSelect
+            labelKey="Name"
+            valueKey="Name"
+            multi={true}
+            options={this.props.coins.Markets}
+            onChange={(selectValue) => this.setState({ selectValue }, console.log(this.state))}
+            value={this.state.selectValue}
+          />
+
+        <button onClick={this.displayCoins.bind(this)}>Display coins</button>
+
         </div>
       )
     }
