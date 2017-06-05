@@ -71,7 +71,11 @@ class Container extends Component {
           />
 
         <button onClick={this.displayCoins.bind(this)}>Display coins</button>
-
+        {this.state.showResults &&
+          this.state.selectValue.map((coin) => {
+            return <CoinInfo coin={coin} key={coin.Label} />
+          })
+        }
         </div>
       )
     }
