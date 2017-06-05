@@ -18,6 +18,7 @@ class Container extends Component {
       showResults: false
     }
   }
+
   componentWillMount() {
     this.props.fetchCoins()
   }
@@ -49,16 +50,11 @@ class Container extends Component {
         </div>
       )
     } else {
-      console.log('hello');
-      const options = [
-      { label: "One", value: 1 },
-      { label: "Two", value: 2 },
-      { label: "Three", value: 3, disabled: true }
-      // And so on...
-    ]
 
-      console.log(this.props.coins)
-      console.log(this.props.coins.Markets)
+      const BTC = this.props.coins.Markets.filter(function( obj ) {
+        return obj.Name == "Bitcoin";
+      });
+
       return (
         <div>
           <VirtualizedSelect
@@ -73,7 +69,7 @@ class Container extends Component {
         <button onClick={this.displayCoins.bind(this)}>Display coins</button>
         {this.state.showResults &&
           this.state.selectValue.map((coin) => {
-            return <CoinInfo coin={coin} key={coin.Label} />
+            return <CoinInfo coin={coin} key={coin.Label} btc={BTC[0]}/>
           })
         }
         </div>

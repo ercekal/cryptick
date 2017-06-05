@@ -25,3 +25,14 @@ export function searchCoins(term) {
     payload: term
   }
 }
+
+
+// return dispatch => {
+//   axios.get("https://www.worldcoinindex.com/apiservice/json?key=Ftinz4RIXcufLiWGooKxzUgdc")
+//   .then((res) => {
+//     dispatch({
+//       type: FETCH_COINS,
+//       payload: res.data
+//     })
+//   })
+// }
