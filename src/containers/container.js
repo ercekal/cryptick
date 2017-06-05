@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCoins } from '../actions/index';
 import { bindActionCreators } from 'redux';
-import CoinsList from '../components/CoinsList'
+import CoinInfo from '../components/CoinInfo'
 
 class Container extends Component {
 
@@ -31,12 +31,13 @@ class Container extends Component {
         </div>
       )
     } else {
-      console.log(this.props);
+      console.log('hello');
+      console.log(this.props.coins);
       return (
         <div>
-          {this.props.coins.map((coin) => {
+          {this.props.coins.Markets.map((coin) => {
             return (
-              <CoinList key={coin.Name} coin={coin} />
+              <CoinInfo key={coin.Name} coin={coin} />
             )
           })}
         </div>

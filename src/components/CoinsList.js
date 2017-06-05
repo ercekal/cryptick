@@ -12,6 +12,7 @@ class CoinsList extends Component {
     }
   }
   render() {
+    console.log(this.props.coins);
     if(!this.props.coins) {
       return (
         <div>
