@@ -76,8 +76,9 @@ export default class CoinInfo extends Component {
             onChange={this.onAverageCostChange.bind(this)}
           />
           <p>Total amount BTC: {this.showTotalAmount()}</p>
+          <p>Total amount GBP: {(this.showTotalAmount() * this.props.btc['Price_btc'] || "")}</p>
           <p>Profit amount BTC: {this.showProfitAmount()}</p>
-          <p>Profit amount GBP: {(this.showProfitAmount() * this.props.btc['Price_btc'] || "")}</p>
+          <p>Profit amount GBP: {(this.showProfitAmount() * this.props.btc['Price_gbp'] || "")}</p>
           <p>Profit rate BTC % : {this.showProfitRate()}</p>
         </div>
         )

@@ -1,7 +1,9 @@
 import axios from 'axios'
 import coinsData from '../data.json'
+import portfolio from '../portfolio.json'
 
 export const FETCH_COINS = 'FETCH_COINS';
+export const FETCH_PORTFOLIO = 'FETCH_PORTFOLIO';
 export const SELECTED_COIN = 'SELECTED_COIN';
 export const SEARCH_TERM = 'SEARCH_TERM';
 
@@ -11,6 +13,24 @@ export function fetchCoins() {
     payload: coinsData
   }
 }
+
+export function fetchPortfolio() {
+  return  {
+    type: FETCH_PORTFOLIO,
+    payload: portfolio
+  }
+}
+
+// return dispatch => {
+//   axios.get("https://www.worldcoinindex.com/apiservice/json?key=Ftinz4RIXcufLiWGooKxzUgdc")
+//   .then((res) => {
+//     dispatch({
+//       type: FETCH_COINS,
+//       payload: res.data
+//     })
+//   })
+// }
+
 
 export function selectCoin(title) {
   return  {
@@ -25,14 +45,3 @@ export function searchCoins(term) {
     payload: term
   }
 }
-
-
-// return dispatch => {
-//   axios.get("https://www.worldcoinindex.com/apiservice/json?key=Ftinz4RIXcufLiWGooKxzUgdc")
-//   .then((res) => {
-//     dispatch({
-//       type: FETCH_COINS,
-//       payload: res.data
-//     })
-//   })
-// }

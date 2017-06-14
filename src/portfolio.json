@@ -1,0 +1,15 @@
+{"Portfolio": [
+  {"Name": "bytecoin", "Average": 0.00000144,	"Total": 4987.5},
+  {"Name": "burst",	"Average": 0.00000523,	"Total": 1995},
+  {"Name": "dogecoin",	"Average": 0.00000117,	"Total": 19477.69654},
+  {"Name": "golem",	"Average": 0.00203238,	"Total": 50.73553238},
+  {"Name": "nem",	"Average": 0.00009128,	"Total": 199.5},
+  {"Name": "huntercoin",	"Average": 0.00012271,	"Total": 99.85},
+  {"Name": "ripple",	"Average": 0.00012716,	"Total": 140.5929368},
+  {"Name": "stratis",	"Average": 0.004001497587,	"Total": 155.5119053},
+  {"Name": "digibyte",	"Average": 0.00001671608901,	"Total": 3920.77357},
+  {"Name": "siacoin",	"Average": 0.000005585961783,	"Total": 19239.48},
+  {"Name": "verge",	"Average": 0.00000171,	"Total": 26285.39083},
+  {"Name": "reddcoin",	"Average": 0.0000012,	"Total": 38546.79919},
+  {"Name": "waves",	"Average": 0.0023,	"Total": 13.52681137}
+]}

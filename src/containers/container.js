@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCoins } from '../actions/index';
+import { fetchCoins, fetchPortfolio } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import CoinInfo from '../components/CoinInfo'
 import VirtualizedSelect from 'react-virtualized-select'
@@ -21,6 +21,7 @@ class Container extends Component {
 
   componentWillMount() {
     this.props.fetchCoins()
+    this.props.fetchPortfolio()
   }
 
   displayCoins() {
@@ -42,8 +43,22 @@ class Container extends Component {
   //   }
   // }
 
+  mergePortfolio() {
+    let coins = this.props.coins
+    let portfolio = this.props.portfolio
+    let updatedPortfolio = []
+    coins.Markets.filter((c) => {
+      return portfolio.Portfolio.filter((p) => {
+        if (c.Name.toLowerCase() == p.Name.toLowerCase()) {
+          updatedPortfolio.push({...c, ...p})
+        }
+      })
+      return updatedPortfolio
+    })
+  }
+
   render() {
-    if (!this.props.coins) {
+    if (!this.props.coins && !this.props.portfolio) {
       return(
         <div>
           Loading...
@@ -54,6 +69,11 @@ class Container extends Component {
       const BTC = this.props.coins.Markets.filter(function( obj ) {
         return obj.Name == "Bitcoin";
       });
+      const ETH = this.props.coins.Markets.filter(function( obj ) {
+        return obj.Name == "Ethereum";
+      });
+
+      {this.mergePortfolio()}
 
       return (
         <div>
@@ -64,14 +84,14 @@ class Container extends Component {
             options={this.props.coins.Markets}
             onChange={(selectValue) => this.setState({ selectValue }, console.log(this.state))}
             value={this.state.selectValue}
-          />
+            />
 
-        <button onClick={this.displayCoins.bind(this)}>Display coins</button>
-        {this.state.showResults &&
-          this.state.selectValue.map((coin) => {
-            return <CoinInfo coin={coin} key={coin.Label} btc={BTC[0]}/>
-          })
-        }
+          <button onClick={this.displayCoins.bind(this)}>Display coins</button>
+          {this.state.showResults &&
+            this.state.selectValue.map((coin) => {
+              return <CoinInfo coin={coin} key={coin.Label} btc={BTC[0]}/>
+            })
+          }
         </div>
       )
     }
@@ -79,12 +99,13 @@ class Container extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchCoins }, dispatch)
+  return bindActionCreators({ fetchCoins, fetchPortfolio }, dispatch)
 }
 
 function mapStateToProps(state) {
   return {
     coins: state.coins.coins,
+    portfolio: state.coins.portfolio
   }
 }
 
