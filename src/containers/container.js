@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchCoins, fetchPortfolio } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import CoinInfo from '../components/CoinInfo'
+import PortfolioList from '../components/PortfolioList'
 import VirtualizedSelect from 'react-virtualized-select'
 
 import 'react-select/dist/react-select.css'
@@ -53,8 +54,8 @@ class Container extends Component {
           updatedPortfolio.push({...c, ...p})
         }
       })
-      return updatedPortfolio
     })
+    return updatedPortfolio
   }
 
   render() {
@@ -65,15 +66,12 @@ class Container extends Component {
         </div>
       )
     } else {
-
       const BTC = this.props.coins.Markets.filter(function( obj ) {
         return obj.Name == "Bitcoin";
       });
       const ETH = this.props.coins.Markets.filter(function( obj ) {
         return obj.Name == "Ethereum";
       });
-
-      {this.mergePortfolio()}
 
       return (
         <div>
@@ -89,9 +87,10 @@ class Container extends Component {
           <button onClick={this.displayCoins.bind(this)}>Display coins</button>
           {this.state.showResults &&
             this.state.selectValue.map((coin) => {
-              return <CoinInfo coin={coin} key={coin.Label} btc={BTC[0]}/>
+              return <CoinInfo coin={coin} key={coin.Label} btc={BTC[0]} eth={ETH[0]} />
             })
           }
+          <PortfolioList portfolio={this.mergePortfolio()} btc={BTC[0]} eth={ETH[0]} />
         </div>
       )
     }

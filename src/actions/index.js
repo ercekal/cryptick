@@ -8,9 +8,14 @@ export const SELECTED_COIN = 'SELECTED_COIN';
 export const SEARCH_TERM = 'SEARCH_TERM';
 
 export function fetchCoins() {
-  return  {
-    type: FETCH_COINS,
-    payload: coinsData
+  return dispatch => {
+    axios.get("https://www.worldcoinindex.com/apiservice/json?key=Ftinz4RIXcufLiWGooKxzUgdc")
+    .then((res) => {
+      dispatch({
+        type: FETCH_COINS,
+        payload: res.data
+      })
+    })
   }
 }
 
@@ -21,16 +26,10 @@ export function fetchPortfolio() {
   }
 }
 
-// return dispatch => {
-//   axios.get("https://www.worldcoinindex.com/apiservice/json?key=Ftinz4RIXcufLiWGooKxzUgdc")
-//   .then((res) => {
-//     dispatch({
-//       type: FETCH_COINS,
-//       payload: res.data
-//     })
-//   })
+// return  {
+//   type: FETCH_COINS,
+//   payload: coinsData
 // }
-
 
 export function selectCoin(title) {
   return  {
