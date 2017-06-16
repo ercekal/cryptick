@@ -4,11 +4,17 @@ import { connect } from 'react-redux';
 
 class PortfolioList extends Component {
 
-  calculate(){
+  calculate() {
+    let portfolio = this.props.portfolio
     let TotalBtc = 0
     let SpentBtc = 0
     let TotalGBP = 0
-    let SpentGBP = 0
+    for (let i = 0; i < portfolio.length; i++) {
+      TotalBtc = TotalBtc + (portfolio[i].Total * portfolio[i].Price_btc)
+      SpentBtc = SpentBtc + (portfolio[i].Average * portfolio[i].Total)
+      TotalGBP = TotalGBP + (portfolio[i].Total * portfolio[i].Price_gbp)
+    }
+    console.log('total btc = '+ TotalBtc + ', spent BTC = ' + SpentBtc + ', total GBP = ' + TotalGBP)
   }
   render() {
     if(!this.props.portfolio) {
@@ -18,7 +24,6 @@ class PortfolioList extends Component {
         </div>
       )
     } else {
-
       return (
         <div>
           {this.props.portfolio.map((coin) => {
@@ -29,6 +34,7 @@ class PortfolioList extends Component {
                     eth={this.props.eth}
                     />
           })}
+        {this.calculate()}          
         </div>
       )
     }

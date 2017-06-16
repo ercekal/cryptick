@@ -47,6 +47,7 @@ export default class CoinInfo extends Component {
           <p>Price BTC : {this.props.coin.Price_btc}</p>
           <p>Amount : {this.props.coin.Total}</p>
           <p>Average Cost BTC : {this.props.coin.Average}</p>
+          <p>Total spent BTC : {this.props.coin.Average * this.props.coin.Total}</p>
           <p>Total amount BTC: {this.showTotalAmount()}</p>
           <p>Total amount GBP: {(this.showTotalAmount() * this.props.btc['Price_gbp'] || "")}</p>
           <p>Profit amount BTC: {this.showProfitAmount()}</p>
